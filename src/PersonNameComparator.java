@@ -18,9 +18,9 @@ public class PersonNameComparator implements Comparator<Person> {
         if (firstWords.length <= countOfSurnameWords && secondWords.length <= countOfSurnameWords) {
 
             if (firstWords.length > secondWords.length) {
-                return -1;
-            } else if (firstWords.length < secondWords.length) {
                 return 1;
+            } else if (firstWords.length < secondWords.length) {
+                return -1;
             } else {
                 return Integer.compare(p1.getAge(), p2.getAge());
             }
