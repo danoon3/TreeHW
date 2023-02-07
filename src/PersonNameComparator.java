@@ -9,23 +9,20 @@ public class PersonNameComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person p1, Person p2) {
-        String firstSurname = p1.getSurname();
-        String secondSurname = p2.getSurname();
+        int firstSurname = p1.getSurname().split("(?U)\\W").length;
+        int secondSurname = p2.getSurname().split("(?U)\\W").length;
 
-        String[] firstWords = firstSurname.split("\\P{IsAlphabetic}+");
-        String[] secondWords = secondSurname.split("\\P{IsAlphabetic}+");
+        if (firstSurname > countOfSurnameWords && secondSurname > countOfSurnameWords) {
+            return Integer.compare(p1.getAge(), p2.getAge());
+        }
 
-        if (firstWords.length <= countOfSurnameWords && secondWords.length <= countOfSurnameWords) {
-
-            if (firstWords.length > secondWords.length) {
-                return 1;
-            } else if (firstWords.length < secondWords.length) {
-                return -1;
-            } else {
-                return Integer.compare(p1.getAge(), p2.getAge());
-            }
+        if (firstSurname > secondSurname) {
+            return 1;
+        } else if (firstSurname < secondSurname) {
+            return -1;
         } else {
             return Integer.compare(p1.getAge(), p2.getAge());
         }
     }
 }
+
